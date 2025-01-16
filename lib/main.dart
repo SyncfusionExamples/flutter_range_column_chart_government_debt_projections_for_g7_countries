@@ -231,7 +231,7 @@ class _CustomRangeColumnSeriesRenderer
 class _RangeColumnCustomPainter extends RangeColumnSegment<G7DebtData, String> {
   _RangeColumnCustomPainter();
 
-  void paintText(Canvas canvas, String text, Offset position, double fontSize,
+  void _paintText(Canvas canvas, String text, Offset position, double fontSize,
       {bool isCenter = false, Color baseColor = Colors.black}) {
     final TextSpan span = TextSpan(
       style: TextStyle(
@@ -252,7 +252,7 @@ class _RangeColumnCustomPainter extends RangeColumnSegment<G7DebtData, String> {
         Offset(position.dx - tp.width / 2, position.dy - tp.height / 2));
   }
 
-  void drawCustomCircle(Canvas canvas, Offset center, double radius,
+  void _drawCustomCircle(Canvas canvas, Offset center, double radius,
       Paint fillPaint, Paint strokePaint) {
     canvas.drawCircle(center, radius, fillPaint);
     canvas.drawCircle(center, radius - 1, strokePaint);
@@ -294,16 +294,16 @@ class _RangeColumnCustomPainter extends RangeColumnSegment<G7DebtData, String> {
 
     canvas.drawRRect(segmentRect!, gradientPaint);
 
-    drawCustomCircle(canvas, Offset(center, top), segmentRect!.width / 2,
+    _drawCustomCircle(canvas, Offset(center, top), segmentRect!.width / 2,
         isPositiveChange ? customPaint : fillPaint, strokePaint);
-    drawCustomCircle(canvas, Offset(center, bottom), segmentRect!.width / 2,
+    _drawCustomCircle(canvas, Offset(center, bottom), segmentRect!.width / 2,
         isPositiveChange ? fillPaint : customPaint, strokePaint);
 
-    paintText(canvas, '${topText.round()}%', Offset(center, top), 20);
-    paintText(canvas, '${bottomText.round()}%', Offset(center, bottom), 20);
+    _paintText(canvas, '${topText.round()}%', Offset(center, top), 20);
+    _paintText(canvas, '${bottomText.round()}%', Offset(center, bottom), 20);
 
     if (centerText.abs() > 5) {
-      paintText(
+      _paintText(
         canvas,
         '${centerText >= 0 ? '+' : ''}${centerText.round()}pp',
         segmentRect!.center,
